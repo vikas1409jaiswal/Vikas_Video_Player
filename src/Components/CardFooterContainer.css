@@ -1,0 +1,14 @@
+.card-footer-container{
+    background-color: honeydew;
+    border: 2px solid black;
+}
+
+.play-button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.pause-button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

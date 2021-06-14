@@ -1,22 +1,18 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import MaterialUiDemo from './Components/MaterialUiDemo';
+import PageBodyContainer from './Components/PageBodyContainer';
+import ReactVideoPlayer from './Components/ReactVideoPlayer';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+       <h1>React Video Player</h1>
+       <marquee>Welcome to our player, you will be better experiencing video watch now</marquee>
+       {/* <MaterialUiDemo/>
+       <ReactVideoPlayer/> */}
+       <PageBodyContainer/>
       </header>
     </div>
   );

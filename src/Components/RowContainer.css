@@ -1,0 +1,11 @@
+.card-body{
+    width: auto;
+    height: 100%;
+    border:solid 2px red;
+}
+
+.vertical-spacing{
+    height: 30px;
+    text-align: center;
+    align-content: center;
+}
