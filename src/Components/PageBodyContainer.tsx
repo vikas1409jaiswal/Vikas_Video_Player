@@ -15,7 +15,7 @@ const PageBodyContainer : React.FunctionComponent<PageBodyContainerProps> = (pro
    const [currentSelectedFileDetails, setcurrentSelectedFileDetails] = useState<string[]>([]);
    const [isZoomedInPlayer, setisZoomedInPlayer] = useState(false);
 
-   const titleNumberByPageChange = 10*(currentPageNumber)-10;
+   const titleNumberByPageChange = 10*(currentPageNumber - 1);
 
    const cardTitleNumber : string[][] = 
           [[(titleNumberByPageChange + 1).toString(),
@@ -32,27 +32,30 @@ const PageBodyContainer : React.FunctionComponent<PageBodyContainerProps> = (pro
     return (
         <div className="card mb-3">
             <div className="card-header text-muted">
-                <PageHeaderContainer pageHeaderNumber={currentPageNumber}
-                                     allSelectedFiles={(files) => {setcurrentSelectedFiles(files)}}
-                                     allSelectedFileDetails={(details => setcurrentSelectedFileDetails(details))}
-                                     sendIsZoomedIn={(z) => setisZoomedInPlayer(z)}/>
+                <PageHeaderContainer 
+                    pageHeaderNumber={currentPageNumber}
+                    allSelectedFiles={(files) => {setcurrentSelectedFiles(files)}}
+                    allSelectedFileDetails={(details => setcurrentSelectedFileDetails(details))}
+                    currentSelectedFiles={currentSelectedFiles} 
+                    currentSelectedFileDetails={currentSelectedFileDetails}
+                    sendIsZoomedIn={(z) => setisZoomedInPlayer(z)}/>
             </div>
             <div className="card-body">
                 {
                     cardTitleNumber.map(n =>
-                        <RowContainer cardtitle={n}
-                                      currentSelectedFiles={currentSelectedFiles} 
-                                      currentSelectedFileDetails={currentSelectedFileDetails}
-                                      isZoomedInPlayer={isZoomedInPlayer}
-                                      />
+                        <RowContainer 
+                            cardtitle={n}
+                            currentSelectedFiles={currentSelectedFiles} 
+                            currentSelectedFileDetails={currentSelectedFileDetails}
+                            isZoomedInPlayer={isZoomedInPlayer}/>
                     )
                 }
             </div>
             <div className="card-footer text-muted">
-                <PageFooterContainer accessPageNumber={(n) =>{
-                    setcurrentPageNumber(n)
-                }}
-                currentPageNumber={currentPageNumber}/>
+                <PageFooterContainer 
+                    accessPageNumber={(n) =>{
+                       setcurrentPageNumber(n)}}
+                    currentPageNumber={currentPageNumber}/>
             </div>
         </div>
     )

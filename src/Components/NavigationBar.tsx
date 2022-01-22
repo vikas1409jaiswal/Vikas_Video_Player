@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import AlphabetSelectionPanel from './AlphabetSelectionPanel';
 import SearchPanel from './SearchPanel';
 import SideBarContainer from './SideBarContainer';
 
-const NavigationBar : React.FunctionComponent = () => {
+interface NavigationBarProps{
+    currentPageNumber: number;
+    currentSelectedFiles: any[]; 
+    currentSelectedFileDetails: string[];
+}
+
+const NavigationBar : React.FunctionComponent<NavigationBarProps> = (props) => {
   
     const [isSideBarVisible, setisSideBarVisible] = useState(false);
 
@@ -25,15 +32,36 @@ const NavigationBar : React.FunctionComponent = () => {
                                 </li>
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Category
-                            </a>
+                                        Selected Videos
+                                    </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="#">Category 1</a>
-                                        <a className="dropdown-item" href="#">Category 2</a>
-                                        <a className="dropdown-item" href="#">Category 3</a>
-                                        <a className="dropdown-item" href="#">Category 4</a>
+                                        {props.currentSelectedFiles.map((sf, i) => {
+                                            var highlightColor ='white';
+                                            if (i < props.currentPageNumber*10 && i>= (props.currentPageNumber -1)*10){
+                                                highlightColor= 'orange'
+                                            }
+                                       return (<div className="dropdown-option" style={{backgroundColor: highlightColor}}>
+                                            <a className="dropdown-item" href="#">
+                                            {sf}
+                                            </a>
+                                        </div>)
+                                        })}
                                         <div className="dropdown-divider"></div>
                                         <a className="dropdown-item" href="#">Special Category</a>
+                                    </div>
+                                </li>
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Page Videos
+                                    </a>
+                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        {props.currentSelectedFiles.filter((f,i) => i < props.currentPageNumber*10 && i>= (props.currentPageNumber -1)*10).map((sf, i) => {                                            
+                                       return (<div className="dropdown-option">
+                                            <a className="dropdown-item" href="#">
+                                            {sf}
+                                            </a>
+                                        </div>)
+                                        })}
                                     </div>
                                 </li>
                                 <li className="nav-item">
@@ -51,7 +79,7 @@ const NavigationBar : React.FunctionComponent = () => {
                 <div>
                     {
                         isSideBarVisible ?
-                            <SideBarContainer />
+                            <AlphabetSelectionPanel/>// <SideBarContainer />
                             : null
                     }
                 </div>

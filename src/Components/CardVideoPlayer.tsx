@@ -25,8 +25,8 @@ const CardVideoPlayer : React.FunctionComponent<CardVideoPlayerProps> = (props) 
             <ReactPlayer
                className='react-player video-player-box'
                url={props.currentSelectedFileDetails}
-               width="100%"
-               height={props.isZoomedInPlayer?400:250}
+               width="fit-content"
+               height={props.isZoomedInPlayer?"100%":"100%"}
                controls = {true}              
             />
         </div>

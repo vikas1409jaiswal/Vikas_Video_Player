@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import VolumeController from './VideoComponents/VolumeController';
+import './ReactVideoPlayer.css';
 
 interface ReactVideoPlayerProps{
   selectedfile: any;
@@ -21,7 +22,7 @@ const ReactVideoPlayer : React.FunctionComponent<ReactVideoPlayerProps> = () => 
     const [allFiles, setallFiles] = useState<MediaStreamModel[]>([]);
     const [currentVideoPath, setcurrentVideoPath] = useState<string[]>(videoFilePaths.filter((m,i) => i==0));
     const [currentVideoIndex, setcurrentVideoIndex] = useState(0);
-    const videoSequencer = [0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72];
+    const videoSequencer = [0,1,2,3,4];
     const [isplayingOnHover, setplayingOnHover] = useState(false);
     const [isplayingOnClick, setplayingOnClick] = useState(false);
     const [currentVolume, setCurrentVolume] = useState(50);
@@ -86,48 +87,36 @@ const ReactVideoPlayer : React.FunctionComponent<ReactVideoPlayerProps> = () => 
     }
 
     return (
-        <div className='player-wrapper'>
-            <input multiple type="file" name="files[]" onChange={handleVideoUpload}/>
-            <button onClick={playNextVideo}>Next Video</button>
-            <button onClick={playPreviousVideo}>Previous Video</button>
-            {
-                videoSequencer.map(h =>
-                  <div className="row"> 
-                      <div className="col-sm-8">
-                        <ReactPlayer
-                        className='react-player'
-                        url={videoFilePaths.filter((m, i) => i == (currentVideoIndex + h/2))}
-                        width="100%"
-                        height="100%"
-                        onMouseOver = {playVideoOnHover}
-                        onMouseOut = {pauseVideoOnHoverAway}
-                        playing ={isplayingOnHover?isplayingOnHover:isplayingOnClick}
-                        playbackRate = {isplayingOnHover?16:1}
-                        progressInterval = {10000}
-                        volume = {isplayingOnHover?0:currentVolume}
-                        controls={true}
-                      />
-                      </div>
-                      <div className="col-sm-2"> 
-                      <button onClick={playVideoOnClick}>Play Video</button>
-                      <VolumeController currentVolume={(n) => {setCurrentVolume(n)}}/>
-                      </div>   
-                      <div className="col-sm-2"> 
-                      <button onClick={pauseVideoOnClick}>Pause Video</button>
-                      </div>                                 
-                    <div className="col-sm-8">
-                      <ReactPlayer
-                        className='react-player'
-                        url={videoFilePaths.filter((m, i) => i == (currentVideoIndex + (h+2)/2))}
-                        width="100%"
-                        height="100%"
-                        controls={true}
-                      />
-                    </div>
-                  </div> 
-                  )
-            }            
+      <div className='player-wrapper'>
+        <input multiple type="file" name="files[]" onChange={handleVideoUpload} />
+        <button onClick={playNextVideo}>Next Video</button>
+        <button onClick={playPreviousVideo}>Previous Video</button>
+        <div className="row row-react-player">
+          <div className="col-sm-12">
+            <header>{allFiles.filter((m,i)=> i === (currentVideoIndex)).map(m => m.name).toString()}</header>
+            <ReactPlayer
+              className='react-player'
+              url={videoFilePaths.filter((m, i) => i === (currentVideoIndex))}
+              width="100%"
+              height="100%"
+              onMouseOver={playVideoOnHover}
+              onMouseOut={pauseVideoOnHoverAway}
+              playing={isplayingOnHover ? isplayingOnHover : isplayingOnClick}
+              playbackRate={isplayingOnHover ? 16 : 1}
+              progressInterval={10000}
+              volume={isplayingOnHover ? 0 : currentVolume}
+              controls={true}
+            />
+          </div>
+          <div className="col-sm-2">
+            <button onClick={playVideoOnClick}>Play Video</button>
+            <VolumeController currentVolume={(n) => { setCurrentVolume(n) }} />
+          </div>
+          <div className="col-sm-2">
+            <button onClick={pauseVideoOnClick}>Pause Video</button>
+          </div>
         </div>
+      </div>
     )
 }
 

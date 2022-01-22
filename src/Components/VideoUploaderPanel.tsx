@@ -1,5 +1,6 @@
 import { Select } from '@material-ui/core';
 import React, { useState } from 'react';
+import './VideoUploaderPanel.css';
 
 interface VideoUploaderPanelProps{
     allSelectedFiles: (files: any[]) => void;
@@ -40,34 +41,41 @@ const VideoUploaderPanel : React.FunctionComponent<VideoUploaderPanelProps> = (p
     }
     
     return (
-        <div className="row">
-          <div className="col-sm-4">
+        <div className="video-uploader-panel">
+          <div className="video-select-input">
              <input multiple type="file" name="files[]" onChange={handleVideoUpload}/>
           </div>
-          <div className="col-sm-4">
-             <>
-            <button className="btn btn-primary btn-sm" 
-            onClick={() => {
-              setZoomSelection(!isZoomSelectionOpen);
-            }}
-            >Zoom Player</button>
-             </>
-            { isZoomSelectionOpen &&
+          <div className="zoom-type-select">
+            <button 
+                className="btn btn-primary btn-sm" 
+                onClick={() => {
+                    setZoomSelection(!isZoomSelectionOpen);
+                }
+            }>
+              Zoom Player
+            </button>
+        { isZoomSelectionOpen &&
          <>
-         <div className="row">
-          <div className="col-sm-6">
-          <button className="btn btn-danger btn-sm" 
-          onClick={() => {
-            setisZoomedIn(true);
-            props.sendIsZoomedIn(isZoomedIn);
-          }}>ZoomIn</button>
+         <div className="zoom-select-options">
+            <div className="zoom-in-select">
+            <button className="btn btn-danger btn-sm" 
+               onClick={() => {
+                 setisZoomedIn(true);
+                 props.sendIsZoomedIn(isZoomedIn);
+                 }
+             }>
+               ZoomIn
+            </button>
           </div>
-          <div className="col-sm-6">
+          <div className="zoom-out-select">
           <button className="btn btn-danger btn-sm" 
-          onClick={() => {
-            setisZoomedIn(false);
-            props.sendIsZoomedIn(isZoomedIn);
-          }}>ZoomOut</button>
+             onClick={() => {
+                setisZoomedIn(false);
+                props.sendIsZoomedIn(isZoomedIn);
+                }
+          }>
+            ZoomOut
+          </button>
           </div>
           </div>
           </>

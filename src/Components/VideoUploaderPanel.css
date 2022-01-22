@@ -1,0 +1,48 @@
+.video-uploader-panel{
+    border: 2px solid red;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.video-select-input{
+    border: 2px solid blue;
+    margin-right: 30%;
+    margin-left: 30%;
+    width: 40%;
+    border-radius: 5px;
+}
+
+.video-select-input > input{
+    width: 100%;
+}
+
+.zoom-type-select{
+    border: 2px solid blue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 25%;
+    background-color: honeydew;
+}
+
+.zoom-type-select > button{
+    width: 90%;
+}
+
+.zoom-select-options{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-top: 10px;
+}
+
+.zoom-in-select > button{
+    width: 90%;
+    background-color: greenyellow;
+    color: black;
+}
+
+.zoom-out-select > button{
+    width: 90%;
+    background-color: greenyellow;
+    color: black;
+}

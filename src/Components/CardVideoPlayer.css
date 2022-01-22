@@ -1,4 +1,10 @@
 .video-player-box{
- border: solid 2px orange;
- height: 100%;
+   border: solid 2px orange;
+   height: 100%;
+   width: 100%;
+}
+
+.player-wrapper{
+  height: 100%;
+  width: 100%;
 }

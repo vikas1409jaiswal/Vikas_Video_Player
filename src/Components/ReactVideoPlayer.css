@@ -1,0 +1,11 @@
+.row-react-player{
+    width: 80%;
+    height: 800px;
+    border: 2px solid blue;
+    align-content: center;
+    justify-content: center;
+}
+
+.react-player{
+    border: 2px solid black;
+}

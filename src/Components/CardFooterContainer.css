@@ -1,6 +1,7 @@
 .card-footer-container{
     background-color: honeydew;
     border: 2px solid black;
+    height: 100%;
 }
 
 .play-button{

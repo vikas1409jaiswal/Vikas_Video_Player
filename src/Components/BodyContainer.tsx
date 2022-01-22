@@ -16,22 +16,18 @@ interface BodyContainerProps{
 const BodyContainer : React.FunctionComponent<BodyContainerProps> = (props) => {
     return (
         <>
-            <div className="row">
-                <div className="col-sm-12">
-                    <div className="body-container">
-                        <div className="card-header-plate">
-                            <CardHeaderContainer cardtitle={props.cardtitle} currentSelectedFiles={props.currentSelectedFiles} />
-                        </div>
-                        <div className="card-plate">
-                            <CardContainer currentSelectedFiles={props.currentSelectedFiles}
-                                isVideoPlaying={props.isVideoPlaying}
-                                currentSelectedFileDetails={props.currentSelectedFileDetails} 
-                                isZoomedInPlayer={props.isZoomedInPlayer}/>
-                        </div>
-                        <div className="card-footer-plate">
-                            <CardFooterContainer isVideoopen={props.isVideoOpen}/>
-                        </div>
-                    </div>
+            <div className="card-body-container">
+                <div className="card-header-plate">
+                    <CardHeaderContainer cardtitle={props.cardtitle} currentSelectedFiles={props.currentSelectedFiles} />
+                </div>
+                <div className="card-plate">
+                    <CardContainer currentSelectedFiles={props.currentSelectedFiles}
+                        isVideoPlaying={props.isVideoPlaying}
+                        currentSelectedFileDetails={props.currentSelectedFileDetails}
+                        isZoomedInPlayer={props.isZoomedInPlayer} />
+                </div>
+                <div className="card-footer-plate">
+                    <CardFooterContainer isVideoopen={props.isVideoOpen} />
                 </div>
             </div>
         </>

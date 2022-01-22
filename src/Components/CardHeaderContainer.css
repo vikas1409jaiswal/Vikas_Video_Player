@@ -1,5 +1,11 @@
 .card-header-container{
     background-color: honeydew;
     border: 2px solid black;
-    height: 45px;
+    height: 100%;
+}
+
+.card-header-container > h6{
+   font-size: 25px;
+   color: blue;
+   font-weight: bolder;
 }

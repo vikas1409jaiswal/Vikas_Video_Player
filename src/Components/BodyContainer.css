@@ -1,13 +1,19 @@
-.body-container{
+.card-body-container{
     width: 100%;
-    height: 100%;
+    height: 95%;
+    margin-top: 2%;
     background-color: yellow;
-    border: solid 2px green;
+    border: solid 2px yellow;
 }
 
-.body-container{
-    width: 100%;
-    height: 100%;
-    background-color: aquamarine;
+.card-header-plate{
+    height: 15%;
 }
 
+.card-plate{
+    height: 70%;
+}
+
+.card-footer-plate{
+    height: 15%;
+}
