@@ -1,14 +1,14 @@
-import { Select } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { SelectedVideoFilesContext } from './PageBodyContainer';
 import './VideoUploaderPanel.css';
 
 interface VideoUploaderPanelProps{
-    allSelectedFiles: (files: any[]) => void;
-    allSelectedFileDetails: (fileDetails: string[]) => void;
     sendIsZoomedIn : (isZoomedIn : boolean) => void;
 }
 
 const VideoUploaderPanel : React.FunctionComponent<VideoUploaderPanelProps> = (props) => {
+
+    const selectedVideoFilesContext = useContext(SelectedVideoFilesContext);
 
     const [videoFilePaths, setvideoFilePaths] = useState<string[]>([]);
     const [allFiles, setallFiles] = useState<any[]>([]);
@@ -26,7 +26,7 @@ const VideoUploaderPanel : React.FunctionComponent<VideoUploaderPanelProps> = (p
               i++;
             }     
             return p;});
-        props.allSelectedFiles(allFiles);
+        selectedVideoFilesContext.setcurrentSelectedFiles(allFiles);
         setvideoFilePaths(vp => {
             vp = [];
             var i = 0;
@@ -36,7 +36,7 @@ const VideoUploaderPanel : React.FunctionComponent<VideoUploaderPanelProps> = (p
               i++;
             }     
             return vp;})
-        props.allSelectedFileDetails(videoFilePaths); 
+        selectedVideoFilesContext.setcurrentSelectedFileDetails(videoFilePaths); 
             
     }
     

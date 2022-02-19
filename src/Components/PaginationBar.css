@@ -1,3 +1,7 @@
-.pagination-bar-plate{
+.pagination-blocks{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    border: 2px solid orange;
+    width: 100%;
     height: 100%;
 }

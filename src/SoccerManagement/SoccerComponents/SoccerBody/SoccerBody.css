@@ -1,0 +1,6 @@
+﻿.soccer-home-page-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 500px;
+    background-color: papayawhip;
+}

@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AlphabetSelectionPanel from './AlphabetSelectionPanel';
+import { SelectedVideoFilesContext } from './PageBodyContainer';
 import SearchPanel from './SearchPanel';
 import SideBarContainer from './SideBarContainer';
 
 interface NavigationBarProps{
     currentPageNumber: number;
-    currentSelectedFiles: any[]; 
-    currentSelectedFileDetails: string[];
 }
 
 const NavigationBar : React.FunctionComponent<NavigationBarProps> = (props) => {
   
+    const selectedVideoFilesContext = useContext(SelectedVideoFilesContext);
+
     const [isSideBarVisible, setisSideBarVisible] = useState(false);
 
     return (
@@ -34,8 +35,8 @@ const NavigationBar : React.FunctionComponent<NavigationBarProps> = (props) => {
                                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Selected Videos
                                     </a>
-                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        {props.currentSelectedFiles.map((sf, i) => {
+                                    <div className="dropdown-menu pre-scrollable" aria-labelledby="navbarDropdown">
+                                        {(selectedVideoFilesContext.currentSelectedFiles as string[]).map((sf, i) => {
                                             var highlightColor ='white';
                                             if (i < props.currentPageNumber*10 && i>= (props.currentPageNumber -1)*10){
                                                 highlightColor= 'orange'
@@ -55,7 +56,7 @@ const NavigationBar : React.FunctionComponent<NavigationBarProps> = (props) => {
                                         Page Videos
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        {props.currentSelectedFiles.filter((f,i) => i < props.currentPageNumber*10 && i>= (props.currentPageNumber -1)*10).map((sf, i) => {                                            
+                                        {(selectedVideoFilesContext.currentSelectedFiles as string[]).filter((f,i) => i < props.currentPageNumber*10 && i>= (props.currentPageNumber -1)*10).map((sf, i) => {                                            
                                        return (<div className="dropdown-option">
                                             <a className="dropdown-item" href="#">
                                             {sf}
