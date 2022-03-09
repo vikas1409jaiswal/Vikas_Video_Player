@@ -5,6 +5,7 @@ import PageBodyContainer from './Components/PageBodyContainer';
 import ReactVideoPlayer from './Components/ReactVideoPlayer';
 import { SoccerHomePage } from './SoccerManagement/SoccerHomePage';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import { HomePage } from './EntertainmentManagement/HomePage';
 
 const client = new QueryClient();
 
@@ -16,11 +17,12 @@ function App() {
        <marquee className="moving-subheader">Welcome to our player, you will be better experiencing video watch now</marquee>
        <MaterialUiDemo/>
        <ReactVideoPlayer/>
-      </header>
-      <PageBodyContainer/> */}
-      <QueryClientProvider client={client}>
+      </header>      
+      {/* <PageBodyContainer/> */}
+         <QueryClientProvider client={client}>
       <SoccerHomePage/>
       </QueryClientProvider>
+       {/*  <HomePage/>  */}
     </div>
   );
 }

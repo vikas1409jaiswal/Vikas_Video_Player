@@ -43,6 +43,10 @@ export interface SoccerPlayers {
 
 
 const fetchWikipediaByTeam = (countryName: string): Promise<AxiosResponse<string>> => {
+    if (countryName === 'United States') {
+        return axios.get(`https://en.wikipedia.org/wiki/United_States_men%27s_national_American_football_team`);
+    }
+
     return axios.get(`https://en.wikipedia.org/wiki/${countryName}_national_football_team`);
 }
 
@@ -62,6 +66,8 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
     const currentSquadTable = tableRowsSelector[0]?.parentNode;
     const recentCallUpsTable = tableRowsSelector[tableRowsSelector.length - 1]?.parentNode;
 
+    console.log(tableRowsSelector);
+
     let playersName = currentSquadTable?.querySelectorAll('tr.nat-fs-player > th > a');
     const playersDOB = currentSquadTable?.querySelectorAll('tr.nat-fs-player span.bday');
     const playerClubName = currentSquadTable?.querySelectorAll('tr.nat-fs-player td:nth-last-child(1) > a');
@@ -80,9 +86,11 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
 
     const infoBoxImageSelector = divElement.querySelectorAll('td.infobox-image > a > img');
 
-    if (['Australia', 'Bulgaria', 'Algeria', 'Nigeria', 'Haiti'].includes(countryName)) {
+    if (['Australia', 'Bulgaria', 'Algeria', 'Nigeria', 'Haiti'].indexOf(countryName) != -1) {
         playersName = currentSquadTable?.querySelectorAll('tr.nat-fs-player > th span.vcard > span > a');
-        recentPlayersName = recentCallUpsTable?.querySelectorAll('tr.nat-fs-player > th span.vcard > span > a');
+        if (['Nigeria', 'Algeria'].indexOf(countryName) === -1) {
+            recentPlayersName = recentCallUpsTable?.querySelectorAll('tr.nat-fs-player > th span.vcard > span > a');
+        }
     }
 
     const players: SoccerPlayers = {
@@ -96,7 +104,7 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
             playerId: `0002_CS_${i+1}`,
             dateOfBirth: playersDOB?.item(i)?.textContent,
             playerName: playersName?.item(i)?.textContent,
-            clubName: playerClubName?.item(i)?.innerHTML.replace('amp;',''),
+            clubName: playerClubName?.item(i)?.innerHTML,
             clubNationFlag: playerClubNationFlag?.item(i)?.getAttribute('src'),
             position: playerPosition?.item(i)?.innerHTML,
             InternationlCarreer: {
@@ -113,7 +121,7 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
             playerId: `0002_RCU_${i + 1}`,
             dateOfBirth: recentPlayersDOB?.item(i)?.textContent,
             playerName: recentPlayersName?.item(i)?.textContent,
-            clubName: recentPlayerClubName?.item(i)?.innerHTML.replace('amp;',''),
+            clubName: recentPlayerClubName?.item(i)?.innerHTML,
             clubNationFlag: recentPlayerClubNationFlag?.item(i)?.getAttribute('src'),
             position: recentPlayerPosition?.item(i)?.innerHTML,
             InternationlCarreer: {
@@ -124,6 +132,8 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
             additionalInformation: null
         });
     }
+
+    console.log(players);
 
     return players;
 }
@@ -158,7 +168,7 @@ export const useWikipediaBySoccerPlayer = (player: SoccerPlayer, playerList: Soc
     }
 
     fullName = playerFullName?.item(0)?.textContent;
-    fullName = fullName?.includes('[') ? fullName?.slice(0, fullName?.lastIndexOf('[')) : fullName;
+    fullName = fullName?.indexOf('[') != -1 ? fullName?.slice(0, fullName?.lastIndexOf('[')) : fullName;
 
     console.log(height);
 
@@ -175,7 +185,7 @@ export const useWikipediaBySoccerPlayer = (player: SoccerPlayer, playerList: Soc
         }
     }
 
-    console.log(playerList[playerIndex]);
+    console.log(playerList);
 
     return playerList[playerIndex];
 }

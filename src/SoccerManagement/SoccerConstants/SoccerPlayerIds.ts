@@ -1,4 +1,4 @@
-﻿import { SoccerPlayers} from "../SoccerHooks/useWikipedia";
+﻿import { SoccerPlayers, useWikipediaByCountry } from "../SoccerHooks/useWikipedia";
 
 export type PlayerIds = {
     FW: string[];

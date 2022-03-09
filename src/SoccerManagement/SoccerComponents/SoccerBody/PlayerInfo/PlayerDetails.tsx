@@ -1,9 +1,9 @@
-﻿import React, { useContext, useEffect } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { getPlayersIds } from '../../../SoccerConstants/SoccerPlayerIds';
 import { PlayerPosition, SoccerContext } from '../../../SoccerHomePage';
 import { SoccerPlayer, SoccerPlayers, useWikipediaBySoccerPlayer } from '../../../SoccerHooks/useWikipedia';
 import { SelectedPlayerIndex } from '../SoccerBody';
-import { motion, useAnimation } from 'framer-motion';
+import { animate, motion, useAnimation } from 'framer-motion';
 
 import './PlayerDetails.css';
 
@@ -153,7 +153,7 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
         });
         playerImageControl.start({
             scale: [0.1, 1],
-            rotate: [180 , 0],
+            rotate: [720 , 0],
             transition: {
                 type: 'spring',
                 stiffness: 100,
@@ -165,11 +165,11 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
     return (
         <>
             <div className='soccer-football-player'>
-                <motion.div
+            <motion.div
                     className='soccer-player-image'
                     animate={playerImageControl}
-                    whileHover={{
-                        backgroundColor: 'honeydew'
+                    whileTap={{
+                        backgroundColor: 'orange'
                     }}>
                     {playerWithAddInfo.additionalInformation?.imagePath ?
                         <motion.img src={playerWithAddInfo.additionalInformation?.imagePath?.toString()}/>
@@ -178,17 +178,19 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
                     <div className='soccer-player-details'>
                     <motion.h1
                         animate={playerDetailsControl}
-                        whileHover={{
-                            backgroundColor: 'honeydew'
+                        whileTap={{
+                            scale: 1.05,
+                            backgroundColor: 'pink'
                         }}>
                         {props.player?.playerName?.toUpperCase()}</motion.h1>
                     <motion.div className='soccer-player-details-section'
                         animate={playerDetailsControl}>
                         {
-                            props.player ?
+                            props.player &&
                                 <motion.div
-                                    whileHover={{
-                                        backgroundColor: 'honeydew'
+                                    whileTap={{
+                                        scale: 1.05,
+                                        backgroundColor: 'pink'
                                     }}>
                                     <div><span>Player Id </span><span>{props.player?.playerId}</span></div>
                                     <div><span>Full Name </span><span>{playerWithAddInfo.additionalInformation?.fullName || props.player?.playerName}</span></div>
@@ -200,7 +202,6 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
                                     <div><span>International Matches </span><span>{props.player?.InternationlCarreer.matches}</span></div>
                                     <div><span>International Goals </span><span>{props.player?.InternationlCarreer.goals}</span></div>
                                 </motion.div>
-                                : <div>{'No Data Found'}</div>
                         }
                         </motion.div>
                     </div>

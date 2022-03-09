@@ -14,7 +14,7 @@ export const SoccerHeader: React.FunctionComponent<SoccerHeaderProps> = (props) 
 
     const [currentSelectedIdIndex, setCurrentSelectedIdIndex] = useState(0);
 
-    const countryInfo =  useCountryById(soccerContext.countryId);
+    const countryInfo = useCountryById(soccerContext.countryId);
 
     const allCountriesIds = useCountries().map(cd => cd.id);
 
