@@ -86,6 +86,8 @@ const ReactVideoPlayer : React.FunctionComponent<ReactVideoPlayerProps> = () => 
       setplayingOnClick(false);
     }
 
+    console.log(videoFilePaths.filter((m, i) => i === (currentVideoIndex)));
+
     return (
       <div className='player-wrapper'>
         <input multiple type="file" name="files[]" onChange={handleVideoUpload} />

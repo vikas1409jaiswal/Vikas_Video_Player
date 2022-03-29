@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { channels, getRowsBackgroundColor } from '../Constants/Channels';
 import { 
     arrangeAlphabetically, 
@@ -7,19 +7,23 @@ import {
     femalePerformersList, 
     videoInfoDetails,
     getSiteNameArray, 
-    getYearsArray
+    getYearsArray,
+    getFilteredTimeStamp
 } from '../Utilities/ReusableFunctions';
 
 import './EntertainmentBody.css';
+import { EntertainmentTable } from './EntertainmentTable/EntertainmentTable';
 
 export interface EntertainmentBodyProps {
 }
 
 export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> = (props) => {
-    const columns = ['S.N.', 'Title', 'Channel Name', 'Actres Name', 'Actor Name', 'Release Date', 'Duration', 'View Date'];
     const [searchPerformer, setSearchPerformer] = useState('');
     const [searchTitle, setSearchTitle] = useState('');
-    const [showTable, setShowTable] = useState([true, true]);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [perPage, setPerPage] = useState(50);
+    const [videoMode, setVideoMode] = useState(false);
+    const [selectedChannel, setSelectedChannel] = useState(channels[0]);
 
     const totalMinutes = videoInfoDetails.map(v => parseInt(v.duration.slice(0, 2))).reduce((partialSum, a) => partialSum + a, 0);
     const totalSeconds = videoInfoDetails.map(v => parseInt(v.duration.slice(3, 5))).reduce((partialSum, a) => partialSum + a, 0);
@@ -31,6 +35,14 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
 
     const handleOnInput = (e: any) => {
         setSearchTitle(e.target.value);
+     }
+
+     const handlePageChange = (e: any) => {
+        setPageNumber(parseInt(e.target.value as string))
+     }
+
+     const handlePerPageChange = (e: any) => {
+        setPerPage(parseInt(e.target.value as string))
      }
 
   const selectDropdown = (gender: string = 'M') => {
@@ -51,25 +63,28 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
 
     const filteredVideoDetails = (page: number) => {
        const filteredResult = searchPerformer.length === 0 ?
-            videoInfoDetails.slice(videoInfoDetails.map(v => v.viewId).indexOf(100 * page - 99), videoInfoDetails.map(v => v.viewId).indexOf(100 * page + 1))
+            videoInfoDetails.slice(videoInfoDetails.map(v => v.viewId).indexOf(perPage*(page - 1) + 1), videoInfoDetails.map(v => v.viewId).indexOf(perPage * page + 1))
             : videoInfoDetails.filter(v =>
-                (searchTitle.length == 0 && (v.actressName.indexOf(searchPerformer) != -1 ||
+                (searchTitle.length == 0 ? 
+                (v.actressName.indexOf(searchPerformer) != -1 ||
                 v.actorName.indexOf(searchPerformer) != -1 ||
                 v.videoTitle.indexOf(
                     searchPerformer.slice(searchPerformer.indexOf('---') + 3)
                 ) != -1 ||
-                v.releaseDate.indexOf(searchPerformer) != -1)) ||
-               ( v.videoTitle.includes(searchPerformer))
+                v.releaseDate.indexOf(searchPerformer) != -1) :
+                v.videoTitle.toLowerCase().indexOf(searchPerformer.toLowerCase()) != -1)
             )
 
-        console.log(searchPerformer)
-        console.log(filteredResult);
         return filteredResult;
     };
 
     return (
         <>
             <div className='video-classification'>
+                <span>
+                    <label>{'Total Videos'}</label>
+                    <label>{videoInfoDetails.length - 1}</label>
+                </span>
                 {
                     channels.map(c =>
                         <span>
@@ -79,10 +94,24 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
                 }
                 <span>
                     <label>{'Total Watch Time'}</label>
-                    <label>{`${timeStamp[0]}:${timeStamp[1]}:${timeStamp[2]}`}</label>
+                    <label>{
+                    `${timeStamp[0]}:
+                    ${timeStamp[1].toString().length === 1 ? '0'+ timeStamp[1] : timeStamp[1]}:
+                    ${timeStamp[2].toString().length === 1 ? '0'+ timeStamp[2] : timeStamp[2]}`
+                    }</label>
                 </span>
             </div>
+            <h1>
+                {
+                    videoInfoDetails.filter(v => v.releaseDate.indexOf(
+                    `${new Date().toDateString().slice(8, 10)} ${new Date().toDateString().slice(4, 7)}`
+                    ) != -1).map(p => <span  style={{fontSize: '14px'}}>
+                        {`${p.videoTitle} celebrating ${2022 - parseInt(p.releaseDate.slice(7, 11))} years.`}
+                        </span>)
+                }
+            </h1>
             <div className='video-search-criteria'>
+                <div className='performer-search'>
                 {
                     ['M', 'F'].map((g) =>
                         <div className={`serach-${g === 'F' ? 'female' : 'male'}-performer-dropdown`}>
@@ -91,11 +120,25 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
                         </div>
                     )
                 }
+                </div>
                 <div className='select-site-name'>
                     <label>{'Select Site'}</label>
+                    <select name='select-channel-name' id="channels" onChange={(e) => setSelectedChannel(e.target.value)}>
+                        {
+                          Array.from(new Set([...getSiteNameArray()
+                            .map(s => s.slice(0, s.indexOf('-')))]))
+                            .map(p => <option value={p}>
+                                {p}
+                            </option>)
+                               
+                        }
+                    </select>
                     <select name='select-site-name' id="sites" onChange={handleOnChange}>
+                        <option>{'...select site'}</option>
                         {
                             getSiteNameArray()
+                                .filter(a => a.indexOf(selectedChannel) != -1)
+                                .map(c => c.slice(c.indexOf('---') + 3))
                                 .sort(arrangeAlphabetically)
                                 .map(p => <option value={p}>
                                     {p}
@@ -103,6 +146,7 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
                         }
                     </select>
                 </div>
+                <div className='performer-search'>
                 <div className='select-year'>
                     <label>{'Select Year'}</label>
                     <select name='select-year' id="year" onChange={handleOnChange}>
@@ -115,6 +159,31 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
                         }
                     </select>
                 </div>
+                <div className='select-page'>
+                   <div>
+                   <label>{'Page'}</label>
+                    <select name='select-page' id="page" onChange={handlePageChange} value={pageNumber}>
+                        {
+                            Array.from(Array(Math.floor(videoInfoDetails.length/perPage) + 1).keys())
+                            .map(p => <option value={p + 1}>
+                                    {p + 1}
+                                </option>)
+                        }
+                    </select>
+                   </div>
+                   <div>
+                   <label>{'Per Page'}</label>
+                    <select name='select-per-page' id="per-page" onChange={handlePerPageChange} value={perPage}>
+                        {
+                            [10, 20, 30, 40, 50, 100, 250, 500]
+                            .map(p => <option value={p}>
+                                    {p}
+                                </option>)
+                        }
+                    </select>
+                   </div>
+                </div>
+                </div>
                 <div className='search-title'>
                     <label>{'Select Title'}</label>
                     <div className='search-box'>
@@ -123,82 +192,56 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
                     </div>
                 </div>
             </div>
-            <div className='details-table'>
-                <table className='video-details-table'>
-                    {(searchPerformer.length === 0 ? [1, 2] : [1]).map((p, i) =>
-                        <>
-                            {(searchPerformer.length === 0) ? <h3 onClick={() => {
-                                setShowTable([
-                                    (i === 0 ? !showTable[i] : showTable[i]),
-                                    (i === 1 ? !showTable[i] : showTable[i])
-                                ])
-                            }}>Page - {p}</h3> :
-                                <h6>
-                                    {filteredVideoDetails(p).length + ' Results Found For ' + searchPerformer}
-                                </h6>}
+            <div className='page-navigation'>
+                <button onClick={() => pageNumber > 1 && setPageNumber(pageNumber - 1)}>{'Prev'}</button>
+                <div>
+                    <button onClick={() => setVideoMode(!videoMode)}>{'Video Mode On'}</button>
+                    <div className='tool-tip'> View By Month
+                        <span className="tool-tip-text">
                             {
-                                showTable[i] &&
-                                <>
-                                    <thead>
-                                        <tr>
-                                            {columns.map(i => <th>{i}</th>)}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            filteredVideoDetails(p).map((v, i) => <tr style={
-                                                { backgroundColor: getRowsBackgroundColor(v.channelName) }
-                                            }>
-                                                <td><label className='plate-label id-label'>{v.viewId}</label></td>
-                                                <td>
-                                                    <a href={v.videoUrl}>
-                                                        <label className='tool-tip'>
-                                                            {v.videoTitle}
-                                                            <span className="tool-tip-text">
-                                                                {v.description.length > 0 ? v.description : 'Not Available'}
-                                                            </span>
-                                                        </label>
-                                                    </a>
-                                                </td>
-                                                <td><label className='channel-name-label'>{v.channelName}</label></td>
-                                                <td>{
-                                                    v.actressName.indexOf('&') != -1 ?
-                                                        v.actressName.split(' & ').map(a =>
-                                                            <label className='plate-label performer-name-label'>{a}</label>
-                                                        )
-                                                        : <label className='plate-label performer-name-label'>{v.actressName}</label>
-                                                }</td>
-                                                <td>{
-                                                    v.actorName.indexOf('&') != -1 ?
-                                                        v.actorName.split(' & ').map(a =>
-                                                            <label className='plate-label performer-name-label'>{a}</label>
-                                                        )
-                                                        : <label className='plate-label performer-name-label'>{v.actorName}</label>
-                                                }</td>
-                                                <td>
-                                                    <label className='plate-label' style={{ backgroundColor: 'blue' }}>
-                                                        {v.releaseDate ? v.releaseDate : 'NA'}
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <label className='plate-label' style={{ backgroundColor: 'brown' }}>
-                                                        {v.duration}
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <label className='plate-label' style={{ backgroundColor: 'purple' }}>
-                                                        {v.viewDate.length != 0 ? v.viewDate : 'NA'}
-                                                    </label>
-                                                </td>
-                                            </tr>)
-                                        }
-                                    </tbody>
-                                </>
+                               <table className='view-by-month-table'>
+                                   <thead>
+                                       <tr>
+                                           {['Month', 'Videos', 'Duration'].map(c => <th>{c}</th>)}
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                       {
+                                           ['Jan 2022', 'Feb 2022', 'Mar 2022'].map(
+                                               m => <tr>
+                                                   <td>
+                                                       {m}
+                                                   </td>
+                                                   <td>
+                                                       {videoInfoDetails.filter(v => v.viewDate.indexOf(m) != -1).length}
+                                                   </td>
+                                                   <td>
+                                                       {
+                                                       `${getFilteredTimeStamp(m)[0]}:
+                                                        ${getFilteredTimeStamp(m)[1]}:
+                                                        ${getFilteredTimeStamp(m)[2]}`                                                         
+                                                       }
+                                                   </td>
+                                               </tr>
+                                           )
+                                       }
+                                   </tbody>
+                               </table>
                             }
-                        </>
-                    )}
-                </table>
+                        </span>
+                    </div>
+                </div>
+                <button onClick={() => setPageNumber(pageNumber + 1)}>{'Next'}</button>
             </div>
+           {
+              (searchPerformer.length === 0 ? [pageNumber] : [1]).map(p => 
+                <EntertainmentTable 
+                page={p}
+                videoMode={videoMode}
+                searchPerformer={searchPerformer}
+                filteredVideoDetails={filteredVideoDetails(p)} />
+              )
+           }
         </>
     );
 };

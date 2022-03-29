@@ -85,8 +85,6 @@ export const useFifaRankings = (pageNo: number) => {
 
     const result = useQueries(queries);
 
-    console.log(result);
-
     const fifaTeamDetails: FifaTeamDetails[] = [];
 
     const successArray: boolean[] = [];
@@ -115,8 +113,6 @@ export const useFifaRankings = (pageNo: number) => {
 
         successArray.push(r.isSuccess);
     })
-
-    console.log(fifaTeamDetails);
 
     return [fifaTeamDetails, successArray];
 }

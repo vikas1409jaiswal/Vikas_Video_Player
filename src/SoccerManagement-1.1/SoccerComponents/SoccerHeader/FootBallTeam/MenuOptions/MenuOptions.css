@@ -1,0 +1,54 @@
+﻿.menu-options > div > select {
+    width: 40%;
+    height: 80%;
+    background-color: papayawhip;
+    margin-left: 30%;
+    padding: 2px;
+}
+
+.menu-options > div > label {
+   font-size: 14px;
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: 700;
+   color: black;
+}
+
+.menu-options > div {
+    margin: 5px;
+    height: 80%;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: honeydew;
+}
+
+.menu-options > div {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.menu-options {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: papayawhip;
+}
+
+.menu-options .select-advanced-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+ }
+
+.menu-options button {
+    margin: 5px;
+    height: 60%;
+    width: 80%;
+    border: 2px solid black;
+    background-color: greenyellow;
+    border-radius: 5px;
+}

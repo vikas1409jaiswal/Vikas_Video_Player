@@ -9,6 +9,7 @@ import { FifaWorldRankings } from './FifaWorldRankings/FifaWorldRankings';
 import { PlayerDetails } from './PlayerInfo/PlayerDetails';
 
 import './SoccerBody.css';
+import { FifaTeamRecords } from './FifaTeamRecords/FifaTeamRecords';
 
 export interface SoccerBodyProps {
 }
@@ -75,7 +76,13 @@ export const SoccerBody: React.FunctionComponent<SoccerBodyProps> = (props) => {
                 </div>
             }
             {
-                !soccerContext.showAllPlayers && !soccerContext.showFifaRankings &&
+                soccerContext.showTeamRecords &&
+                <div className='fifa-team-records-body'>
+                    <FifaTeamRecords />
+                </div>
+            }
+            {
+                !soccerContext.showAllPlayers && !soccerContext.showFifaRankings && !soccerContext.showTeamRecords &&
                 <div className='soccer-home-page-body-detail'>
                     <PlayerDetails player={player}
                         soccerPlayers={soccerPlayers}

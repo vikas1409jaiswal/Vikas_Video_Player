@@ -40,7 +40,7 @@ export const FootBallTeam: React.FunctionComponent<FootBallTeamProps> = (props) 
         <>
             <div className='soccer-football-team-header'>
                 {
-                    !soccerContext.showFifaRankings && !soccerContext.showAllPlayers &&
+                    !soccerContext.showFifaRankings && !soccerContext.showAllPlayers && !soccerContext.showTeamRecords &&
                     <>
                         <motion.img animate={teamHeaderControl} src={props.countryInfo ? props.countryInfo.image_path : '//upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/125px-Flag_of_India.svg.png'} />
                         <motion.h1 animate={teamHeaderControl}>{props.countryInfo ? props.countryInfo.name : 'India'} National Football Team</motion.h1>
@@ -53,7 +53,7 @@ export const FootBallTeam: React.FunctionComponent<FootBallTeamProps> = (props) 
                                 onClick={() => {
                                     props.setCurrentSelectedIdIndex(props.currentSelectedIdIndex - 1);
                                 }}>{'<<<'}</button>
-                          <button onClick={() => { setVisibleMenuOptions(!isVisibleMenuOptions) }}>{'SC'}</button>
+                            <button onClick={() => { setVisibleMenuOptions(!isVisibleMenuOptions) }}>{'SC'}</button>
                         </div>
                     </>
                 }

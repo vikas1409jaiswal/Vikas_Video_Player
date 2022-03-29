@@ -100,8 +100,44 @@
     border: 2px solid black;
     margin: 5px;
     padding: 10px;
-    height: 50px;
     border-radius: 5px;
+    height: 120px;
+}
+
+.video-search-criteria > .performer-search {
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: pink;
+}
+
+.video-search-criteria > .performer-search > div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px;
+    background-color: gainsboro;
+}
+
+.video-search-criteria > .performer-search > div > select {
+    font-size: 14px;;
+    font-weight: 700;
+    padding: auto;
+    margin: 2px;
+    color: white;
+    background-color: black;
+}
+
+.video-search-criteria > .performer-search > .select-page > div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.video-search-criteria > .performer-search > .select-page > div > select {
+    margin: 5px 15px;
+    color: white;
+    background-color: black;
 }
 
 .video-search-criteria > div > label {
@@ -171,4 +207,60 @@ label.channel-name-label {
 .search-box {
  display: grid;
  grid-template-columns: 4fr 1fr;
+}
+
+.page-navigation {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  border:  2px solid blue;
+  border-radius: 5px;
+  background-color: honeydew;
+  margin: 10px;
+  padding: 5px;
+}
+
+.page-navigation > div {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.page-navigation > div > div {
+    border: 2px solid red;
+    border-radius: 10px;
+    background-color:blue;
+    color: yellow;
+    margin: 0px 10px;
+}
+
+div.select-site-name {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+div.select-site-name > select {
+    margin: 3px;
+    padding: 2px;
+}
+
+.video-search-criteria .search-title {
+    height: 50px;
+}
+
+.view-by-month-table {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.view-by-month-table > thead > tr{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: yellow;
+    color: black;
+}
+
+.view-by-month-table > tbody > tr {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: yellowgreen;
+    color: blue;
 }

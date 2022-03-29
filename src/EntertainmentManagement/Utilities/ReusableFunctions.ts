@@ -1,7 +1,8 @@
 import {videoInfos} from './../DataFiles/Page-1';
 import {videoInfos2} from './../DataFiles/Page-2';
+import {videoInfos3} from './../DataFiles/Page-3';
 
-export const videoInfoDetails = [...videoInfos, ...videoInfos2];
+export const videoInfoDetails = [...videoInfos, ...videoInfos2, ...videoInfos3];
 
 export const arrangeAlphabetically = (a: string, b: string) => {
     if (a > b) {
@@ -14,8 +15,8 @@ export const arrangeAlphabetically = (a: string, b: string) => {
 }
 
 export const getTimeStamp = (totalSeconds: number) => {
-   const seconds = totalSeconds % 3600;
-   const minutes = (totalSeconds - seconds) % 60;
+   const seconds = totalSeconds % 60;
+   const minutes = ((totalSeconds - seconds) / 60) % 60;
    const hours = (totalSeconds - (minutes*60) - seconds) / 3600;
 
    return [hours, minutes, seconds];
@@ -43,7 +44,16 @@ export const getYearsArray = () => {
     const releaseDates = videoInfoDetails.map(v => (v.releaseDate));
     const releaseYears = releaseDates.filter(d => d.length > 0).map(d =>  d.slice(7, 11));
     return Array.from(new Set([...releaseYears]))
-  }
+}
+
+export const getFilteredTimeStamp = (viewDate: string) => {
+    const filteredVideoInfoDetails = videoInfoDetails.filter(v => v.viewDate.indexOf(viewDate) != -1);
+    const totalMinutes = filteredVideoInfoDetails
+    .map(v => parseInt(v.duration.slice(0, 2))).reduce((partialSum, a) => partialSum + a, 0);
+    const totalSeconds = filteredVideoInfoDetails
+    .map(v => parseInt(v.duration.slice(3, 5))).reduce((partialSum, a) => partialSum + a, 0);
+    return getTimeStamp((totalMinutes*60) + totalSeconds);
+}
 
 export const malePerformersList = getSingleNameArray(videoInfoDetails);
 export const femalePerformersList = getSingleNameArray(videoInfoDetails, 'F');

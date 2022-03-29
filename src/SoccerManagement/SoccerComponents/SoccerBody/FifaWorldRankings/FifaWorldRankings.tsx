@@ -70,7 +70,7 @@ export const FifaWorldRankings: React.FunctionComponent<FifaWorldRankingsProps> 
                         </thead>
                         <tbody>
                             {
-                                soccerContext.fifaRankingDetails.slice(0,10).sort(sortByRank).map(k =>
+                                soccerContext.fifaRankingDetails.sort(sortByRank).map(k =>
                                     <tr>
                                         {[k.fifaRank,
                                         k.teamName,

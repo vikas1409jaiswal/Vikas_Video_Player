@@ -1,0 +1,5 @@
+﻿.soccer-home-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 3px solid black;
+}

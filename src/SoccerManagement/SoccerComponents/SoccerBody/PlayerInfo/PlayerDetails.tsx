@@ -165,7 +165,7 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
     return (
         <>
             <div className='soccer-football-player'>
-            <motion.div
+                <motion.div
                     className='soccer-player-image'
                     animate={playerImageControl}
                     whileTap={{
@@ -186,7 +186,7 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
                     <motion.div className='soccer-player-details-section'
                         animate={playerDetailsControl}>
                         {
-                            props.player &&
+                            props.player ?
                                 <motion.div
                                     whileTap={{
                                         scale: 1.05,
@@ -202,6 +202,7 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
                                     <div><span>International Matches </span><span>{props.player?.InternationlCarreer.matches}</span></div>
                                     <div><span>International Goals </span><span>{props.player?.InternationlCarreer.goals}</span></div>
                                 </motion.div>
+                                : null
                         }
                         </motion.div>
                     </div>

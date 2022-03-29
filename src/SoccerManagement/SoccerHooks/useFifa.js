@@ -66,7 +66,6 @@ var useFifaRankings = function (pageNo) {
     }
     Object.keys(countriesList).map(function (c) { return queries.push(__assign({ queryKey: ['fifa-ranking', c], queryFn: function () { return fetchFifaRankings(c); } }, queryOptions)); });
     var result = react_query_1.useQueries(queries);
-    console.log(result);
     var fifaTeamDetails = [];
     var successArray = [];
     result.map(function (r, i) {
@@ -89,7 +88,6 @@ var useFifaRankings = function (pageNo) {
         });
         successArray.push(r.isSuccess);
     });
-    console.log(fifaTeamDetails);
     return [fifaTeamDetails, successArray];
 };
 exports.useFifaRankings = useFifaRankings;

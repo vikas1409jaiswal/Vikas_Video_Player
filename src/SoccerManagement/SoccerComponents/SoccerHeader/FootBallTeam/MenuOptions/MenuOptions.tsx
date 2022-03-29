@@ -107,7 +107,7 @@ export const MenuOptions: React.FunctionComponent<MenuOptionsProps> = (props) =>
                         <button onClick={() => { soccerContext.setShowFifaRankings(!soccerContext.showFifaRankings) }}>{soccerContext.showFifaRankings ? 'Hide Fifa Rankings' : 'Show Fifa Rankings'}</button>
                     </div>
                     <div>
-                        <button>{'Show'}</button>
+                        <button onClick={() => { soccerContext.setShowTeamRecords(!soccerContext.showTeamRecords) }}>{soccerContext.showTeamRecords ? 'Hide Team Records' : 'Show Team Records'}</button>
                     </div>
                     <div>
                         <button>{'Show'}</button>

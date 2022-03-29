@@ -11,19 +11,21 @@ export interface SoccerHomePageProps {
 
 interface SoccerContextValue {
     countryId: number;
-    setCountryId: (id: number) => void;
     selectedPlayerId: string;
     isSelectedPlayerUsingDropdown: boolean;
     showAllPlayers: boolean;
-    setSelectedPlayerId: (id: string) => void;
     selectedPlayerPosition: PlayerPosition;
+    showFifaRankings: boolean;
+    fifaRankingDetails: FifaTeamDetails[];
+    showTeamRecords: boolean;
+    setCountryId: (id: number) => void;
+    setShowFifaRankings: (choice: boolean) => void;
+    setSelectedPlayerId: (id: string) => void;
+    setShowTeamRecords: (choice: boolean) => void;
+    setFifaRankingDetails: (details: FifaTeamDetails[]) => void;
     setSelectedPlayerPosition: (position: PlayerPosition) => void;
     setSelectedPlayerUsingDropdown: (choice: boolean) => void;
     setShowAllPlayers: (choice: boolean) => void;
-    showFifaRankings: boolean;
-    setShowFifaRankings: (choice: boolean) => void;
-    fifaRankingDetails: FifaTeamDetails[];
-    setFifaRankingDetails: (details: FifaTeamDetails[]) => void;
 }
 
 export enum PlayerPosition {
@@ -48,7 +50,9 @@ const initialSoccerContextValue: SoccerContextValue = {
     showFifaRankings: false,
     setShowFifaRankings: () => { },
     fifaRankingDetails: [],
-    setFifaRankingDetails: () => { }
+    setFifaRankingDetails: () => { },
+    showTeamRecords: false,
+    setShowTeamRecords: () => { }
 }
 export const SoccerContext = createContext<SoccerContextValue>(initialSoccerContextValue);
 
@@ -60,30 +64,33 @@ export const SoccerHomePage: React.FunctionComponent<SoccerHomePageProps> = (pro
     const [isSelectedPlayerUsingDropdown, setSelectedPlayerUsingDropdown] = useState(false);
     const [showAllPlayers, setShowAllPlayers] = useState(false);
     const [showFifaRankings, setShowFifaRankings] = useState(false);
+    const [showTeamRecords, setShowTeamRecords] = useState(true);
     const [fifaRankingDetails, setFifaRankingDetails] = useState<FifaTeamDetails[]>([]);
 
     return (
         <>
             <SoccerContext.Provider value={{
-                countryId: countryId,
-                setCountryId: setCountryId,
-                selectedPlayerId: selectedPlayerId,
-                isSelectedPlayerUsingDropdown: isSelectedPlayerUsingDropdown,
-                showAllPlayers: showAllPlayers,
+                countryId,
+                setCountryId,
+                selectedPlayerId,
+                isSelectedPlayerUsingDropdown,
+                showAllPlayers,
                 showFifaRankings,
                 fifaRankingDetails,
-                setSelectedPlayerId: setSelectedPlayerId,
-                selectedPlayerPosition: selectedPlayerPosition,
-                setSelectedPlayerPosition: setSelectedPlayerPosition,
-                setSelectedPlayerUsingDropdown: setSelectedPlayerUsingDropdown,
-                setShowAllPlayers: setShowAllPlayers,
+                showTeamRecords,
+                setSelectedPlayerId,
+                selectedPlayerPosition,
+                setSelectedPlayerPosition,
+                setSelectedPlayerUsingDropdown,
+                setShowAllPlayers,
                 setShowFifaRankings,
-                setFifaRankingDetails
+                setFifaRankingDetails,
+                setShowTeamRecords,
             }}>
             <div className='soccer-home-page'>
                 <SoccerHeader />
-                <SoccerBody />
-                {showAllPlayers||showFifaRankings ? null : <SoccerFooter />}
+                    <SoccerBody />
+                    {showAllPlayers || showFifaRankings || showTeamRecords ? null : <SoccerFooter />}
              </div>
              </SoccerContext.Provider>
         </>

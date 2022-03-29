@@ -18,11 +18,13 @@ function App() {
        <MaterialUiDemo/>
        <ReactVideoPlayer/>
       </header>      
-      {/* <PageBodyContainer/> */}
-         <QueryClientProvider client={client}>
-      <SoccerHomePage/>
+      <PageBodyContainer/>
+   */} 
+
+      <QueryClientProvider client={client}>
+        <SoccerHomePage/>
       </QueryClientProvider>
-       {/*  <HomePage/>  */}
+      
     </div>
   );
 }

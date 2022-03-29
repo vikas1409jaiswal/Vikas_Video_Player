@@ -2,14 +2,14 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     background-color: papayawhip;
-}
 
-.soccer-home-page-footer > button {
-    background-color: yellow;
-    border-radius: 10px;
-    margin: 10px;
-}
+    button {
+        background-color: yellow;
+        border-radius: 10px;
+        margin: 10px;
+    }
 
-.soccer-home-page-footer > button:hover {
-    background-color: skyblue;
+    button:hover {
+        background-color: skyblue;
+    }
 }

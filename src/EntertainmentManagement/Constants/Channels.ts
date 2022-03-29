@@ -13,8 +13,23 @@ export const channels = [
     'TeamSkeet', 
     'PornWorld', 
     'Life Selector', 
-    'Private'
+    'Private',
+    "Tonight's Girlfriend"
 ];
+
+export type VideoDetails = {
+    viewId: number,
+    actressName: string,
+    actorName: string,
+    channelName: string,
+    videoTitle: string,
+    duration: string,
+    description: string,
+    videoUrl: string,
+    channelPageUrl: string,
+    releaseDate: string,
+    viewDate: string
+}
 
 export const getRowsBackgroundColor = (channel: string) => {
     if (channel === 'Brazzers') {
@@ -63,6 +78,10 @@ export const getRowsBackgroundColor = (channel: string) => {
 
     if (channel === 'PornWorld'){
        return 'red';
+    }
+
+    if (channel === "Tonight's Girlfriend"){
+       return 'deepskyblue';
     }
 
     return 'honeydew'

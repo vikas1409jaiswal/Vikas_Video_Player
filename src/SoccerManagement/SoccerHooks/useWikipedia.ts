@@ -37,36 +37,88 @@ export interface SoccerPlayer {
 
 export interface SoccerPlayers {
     teamNationalLogo: string | null,
+    teamNationalFlag: string,
     currentSquad: SoccerPlayer[],
     recentCallUps: SoccerPlayer[]
+}
+
+export interface HeadToHead {
+    opponentFlagUrl: string,
+    opponent: string,
+    played: string,
+    won: string,
+    drawn: string,
+    lost: string,
+    goalsFor: string,
+    goalsAgainst: string
+}
+
+export interface FootBallTeamRecord {
+    teamLogoUrl: string;
+    headToHeadRecord: HeadToHead[];
+}
+
+
+export interface HeadToHeadMatch {
+    date: string;
+    match: string;
+    result: string;
+    score: string;
+    competition: string;
 }
 
 
 const fetchWikipediaByTeam = (countryName: string): Promise<AxiosResponse<string>> => {
     if (countryName === 'United States') {
-        return axios.get(`https://en.wikipedia.org/wiki/United_States_men%27s_national_American_football_team`);
+        return axios.get(`https://en.wikipedia.org/wiki/United_States_men%27s_national_soccer_team`);
     }
 
     return axios.get(`https://en.wikipedia.org/wiki/${countryName}_national_football_team`);
+}
+
+const fetchWikipediaByFifaTeam = (countryName: string): Promise<AxiosResponse<string>> => {
+
+    const countryModifiedName = countryName.indexOf(' ') !== -1 ? countryName.replace(' ', '-').replace(' ', '-') : countryName;
+
+    return axios.get(`https://www.11v11.com/teams/${countryModifiedName.toLowerCase()}/tab/stats/`);
+}
+
+const fetchHeadToHeadMatches = (teamName: string, oppositionTeamName: string): Promise<AxiosResponse<string>> => {
+
+    //const countryModifiedName = countryName.indexOf(' ') !== -1 ? countryName.replace(' ', '-').replace(' ', '-') : countryName;
+
+    return axios.get(`https://www.11v11.com/teams/${teamName.toLowerCase()}/tab/opposingTeams/opposition/${oppositionTeamName}/`);
 }
 
 const fetchWikipediaByPlayer = (url: any): Promise<AxiosResponse<string>> => {
     return axios.get(`https://en.wikipedia.org/${url}`);
 }
 
+const fetchCountry = (country: string): Promise<AxiosResponse<string>> => {
+    return axios.get(`https://en.wikipedia.org/wiki/${country}`);
+}
+
 export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
 
     const { data } = useQuery(['wikipedia', countryName], () => fetchWikipediaByTeam(countryName));
 
+    const countryInfo = useQuery(['country-info', countryName], () => fetchCountry(countryName));
+
     const divElement = document.createElement('div');
 
+    const divElement2 = document.createElement('div');
+
     divElement.innerHTML = data?.data.toString() as string;
+
+    divElement2.innerHTML = countryInfo?.data?.data.toString() as string;
+
+    console.log(divElement2);
 
     const tableRowsSelector = divElement.querySelectorAll('table > tbody > tr.nat-fs-player');
     const currentSquadTable = tableRowsSelector[0]?.parentNode;
     const recentCallUpsTable = tableRowsSelector[tableRowsSelector.length - 1]?.parentNode;
 
-    console.log(tableRowsSelector);
+    console.log(currentSquadTable);
 
     let playersName = currentSquadTable?.querySelectorAll('tr.nat-fs-player > th > a');
     const playersDOB = currentSquadTable?.querySelectorAll('tr.nat-fs-player span.bday');
@@ -85,8 +137,9 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
     const recentPlayerGoals = recentCallUpsTable?.querySelectorAll('tr.nat-fs-player td:nth-child(5)');
 
     const infoBoxImageSelector = divElement.querySelectorAll('td.infobox-image > a > img');
+    const flagSelector = divElement2.querySelectorAll('td.infobox-image  img');
 
-    if (['Australia', 'Bulgaria', 'Algeria', 'Nigeria', 'Haiti'].indexOf(countryName) != -1) {
+    if (['Australia', 'Bulgaria', 'Algeria', 'Nigeria', 'Haiti', 'United States'].indexOf(countryName) != -1) {
         playersName = currentSquadTable?.querySelectorAll('tr.nat-fs-player > th span.vcard > span > a');
         if (['Nigeria', 'Algeria'].indexOf(countryName) === -1) {
             recentPlayersName = recentCallUpsTable?.querySelectorAll('tr.nat-fs-player > th span.vcard > span > a');
@@ -95,6 +148,7 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
 
     const players: SoccerPlayers = {
         teamNationalLogo: infoBoxImageSelector.item(0)?.getAttribute('src'),
+        teamNationalFlag: flagSelector.item(0)?.getAttribute('src') as string,
         currentSquad: [],
         recentCallUps: []
     };
@@ -133,8 +187,6 @@ export const useWikipediaByCountry = (countryName: string): SoccerPlayers => {
         });
     }
 
-    console.log(players);
-
     return players;
 }
 
@@ -170,8 +222,6 @@ export const useWikipediaBySoccerPlayer = (player: SoccerPlayer, playerList: Soc
     fullName = playerFullName?.item(0)?.textContent;
     fullName = fullName?.indexOf('[') != -1 ? fullName?.slice(0, fullName?.lastIndexOf('[')) : fullName;
 
-    console.log(height);
-
     const playerIndex = playerList.map(p => p.playerId).indexOf(player?.playerId);
 
     playerList[playerIndex] = {
@@ -185,7 +235,83 @@ export const useWikipediaBySoccerPlayer = (player: SoccerPlayer, playerList: Soc
         }
     }
 
-    console.log(playerList);
-
     return playerList[playerIndex];
+}
+
+export const useWikipediaByFootballTeam = (teamName: string) => {
+
+    const { data } = useQuery(
+        ['wikipedia-team-records', teamName],
+        () => fetchWikipediaByFifaTeam(teamName), {
+        cacheTime: 30000
+    });
+
+    const divElement = document.createElement('div');
+
+    divElement.innerHTML = data?.data.toString() as string;
+
+    const teamLogoSelector = divElement.querySelectorAll('td.infobox-image > a > img');
+    const headToHeadTableSelector = divElement.querySelectorAll('tr');
+
+    const headToHead: HeadToHead[] = [];
+
+    for (let i = 0; i < (headToHeadTableSelector as NodeListOf<Element>)?.length; i++) {
+        const tdSelector = headToHeadTableSelector?.item(i)?.querySelectorAll('td');
+        const opponent = tdSelector?.item(0)?.textContent;
+
+        headToHead.push({
+            opponentFlagUrl: '',
+            opponent:opponent as string,
+            played: tdSelector?.item(1)?.textContent as string,
+            won: tdSelector?.item(2)?.textContent as string,
+            drawn: tdSelector?.item(3)?.textContent as string,
+            lost: tdSelector?.item(4)?.textContent as string,
+            goalsFor: tdSelector?.item(5)?.textContent as string,
+            goalsAgainst: tdSelector?.item(6)?.textContent as string
+        })
+    }
+
+    const teamRecord: FootBallTeamRecord = {
+        teamLogoUrl: teamLogoSelector.item(0)?.getAttribute('src') as string,
+        headToHeadRecord: headToHead
+    };
+
+    console.log(teamRecord);
+
+    console.log(teamRecord.headToHeadRecord);
+
+    return teamRecord;
+}
+
+export const useHeadToHeadMatches = (teamName: string, oppositionTeamName: string): HeadToHeadMatch[] => {
+
+    const { data } = useQuery(
+        ['head-to-head-matches', teamName, oppositionTeamName],
+        () => fetchHeadToHeadMatches(teamName, oppositionTeamName), {
+        cacheTime: 30000
+    });
+
+    const divElement = document.createElement('div');
+
+    divElement.innerHTML = data?.data.toString() as string;
+
+    const headToHeadTableSelector = divElement.querySelectorAll('table').item(1)?.querySelectorAll('tr');
+
+    const headToHeadMatches: HeadToHeadMatch[] = [];
+
+    for (let i = 1; i < (headToHeadTableSelector as NodeListOf<Element>)?.length; i++) {
+        const tdSelector = headToHeadTableSelector?.item(i)?.querySelectorAll('td');
+
+        headToHeadMatches.push({
+            date: tdSelector?.item(0)?.textContent as string,
+            match: tdSelector?.item(1)?.textContent as string,
+            result: tdSelector?.item(2)?.textContent as string,
+            score: tdSelector?.item(3)?.textContent as string,
+            competition: tdSelector?.item(4)?.textContent as string,
+        })
+    }
+
+    console.log(headToHeadMatches);
+
+    return headToHeadMatches;
 }
