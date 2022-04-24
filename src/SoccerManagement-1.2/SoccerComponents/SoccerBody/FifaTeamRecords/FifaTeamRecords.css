@@ -1,0 +1,78 @@
+﻿.fifa-team-records-container {
+    border: 2px solid black;
+    margin: 5px;
+    padding: 5px;
+}
+
+.fifa-team-records-container > div {
+    border: 2px solid black;
+    margin: 5px 2px;
+}
+
+.select-soccer-conf {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 5px;
+    background-color: lightgreen;
+}
+
+.select-soccer-conf > span {
+    background-color: blue;
+    margin: 4px 20%;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.fifa-teams-record-details > div {
+    border: 2px solid black;
+    margin: 2px;
+    padding: 2px;
+}
+
+.fifa-teams-record-details > h2 {
+    border: 2px solid black;
+    margin: 5px 10px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    background-color: orange;
+    border-radius: 8px;
+}
+
+.fifa-team-details > div {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    border: 2px solid black;
+    margin: 5px;
+    background-color: lightgreen;
+    text-align: center;
+    height: 118px;
+}
+
+.fifa-team-details > div > h2 {
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 50px;
+    font-weight: bolder;
+    margin: 5px 0px;
+    height: 100px;
+    background-color: gainsboro;
+}
+
+.fifa-team-details > div > h2 > p {
+    border: 2px solid blue;
+    background-color: pink;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.fifa-team-details > div > img {
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+    padding: 2px;
+    background-color: white;
+}

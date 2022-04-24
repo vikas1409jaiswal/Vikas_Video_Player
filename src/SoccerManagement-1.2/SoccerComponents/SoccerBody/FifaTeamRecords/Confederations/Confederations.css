@@ -1,0 +1,11 @@
+﻿.select-soccer-teams {
+    border: 2px solid black;
+    margin: 5px;
+    padding: 0.5% 35%;
+    background-color: palegreen;
+}
+
+.select-soccer-teams select {
+    background-color: black;
+    color: white;
+}

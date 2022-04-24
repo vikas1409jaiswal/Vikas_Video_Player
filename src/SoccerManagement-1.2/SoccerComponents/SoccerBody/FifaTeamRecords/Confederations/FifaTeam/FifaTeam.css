@@ -1,0 +1,230 @@
+﻿.head-to-head-info {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.head-to-head-info > thead > tr {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: orange;
+}
+
+.head-to-head-info > tbody > tr {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 40px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: honeydew;
+}
+
+.head-to-head-info > thead > tr > th {
+   font-size: 14px;
+   font-weight: bolder;
+   text-align: center;
+}
+
+.head-to-head-info > tbody > tr > td {
+   font-size: 14px;
+   font-weight: bolder;
+   background-color: greenyellow;
+   border: 1px solid blue;
+   border-radius: 10px;
+   margin: 2% 30%;
+   text-align: center;
+}
+
+.head-to-head-info > tbody > tr > td.cell-1 {
+   margin: 5px;
+}
+
+.head-to-head-info input{
+   margin: 10px 20px;
+}
+
+.select-opponent-team {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 2px solid black;
+    margin: 5px;
+    background-color: lightgreen;
+}
+
+.select-opponent-team select {
+    background-color: black;
+    color: white;
+    margin: 5px;
+}
+
+.select-opponent-team button {
+    border: 2px solid black;
+    background-color: red;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.select-opponent-team button:disabled {
+    background-color: darkred;
+    margin: 5px;
+}
+
+.head-to-head-header {
+    display: grid;
+    grid-template-columns: 5fr 1fr 5fr;
+}
+
+.head-to-head-single-result {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+.head-to-head-single-result > div {
+    border: 2px solid black;
+    background-color: honeydew;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.country-flag-card {
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 5px 10%;
+    height: 120px;
+    width: 180px;
+}
+
+.common-head-to-head {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.common-head-to-head > div {
+    border: 4px solid blue;
+    border-radius: 10px;
+    margin: 5px;
+    text-align: center;
+    background-color: yellow;
+    height: fit-content;
+}
+
+.common-head-to-head > div > h2 {
+    border: 2px solid black;
+    background-color: aquamarine;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+    height: 50px;
+    color: darkblue;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.common-head-to-head > div > h1 {
+    border: 2px solid black;
+    background-color: orange;
+    border-radius: 50px;
+    margin: 5px;
+    padding: 5px;
+    height: 80px;
+    color: darkblue;
+    font-size: 70px;
+    font-weight: 700;
+}
+
+.total-count {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.head-to-head-matches, .extra-records {
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.extra-records > div {
+    border: 4px solid blue;
+    border-radius: 10px;
+    margin: 10px 50px;
+    text-align: center;
+    background-color: pink;
+    height: fit-content;
+}
+
+.extra-records > div > h1 {
+    border: 2px solid black;
+    background-color: blue;
+    border-radius: 50px;
+    margin: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.head-to-head-matches-table {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.head-to-head-matches-table > thead > tr {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: blue;
+    color: white;
+}
+
+.head-to-head-matches-table > tbody > tr {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.head-to-head-matches-table > thead > tr > th {
+    border: 1px solid white;
+    text-align: center;
+}
+
+.head-to-head-matches-table > tbody > tr > td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.goal-match-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.goal-match-card > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 2px solid blue;
+    background-color: greenyellow;
+    margin: 5px 40px;
+}
+
+.goal-match-card > div > span:nth-child(1) {
+    border: 1px solid black;
+    margin: 10px;
+    background-color: darkmagenta;
+    color: white;
+}
+
+.goal-match-card > div > span:nth-child(2) {
+    border: 2px solid white;
+    margin: 10px;
+    background-color: green;
+    color: white;
+    font-size: 50px;
+}
+
+.common-head-to-head .winner-name {
+    background-color: orange;
+    background-image: url('https://i.pinimg.com/originals/39/1a/96/391a964218aa5d42228201804286641c.png');
+    background-size: cover;
+    height: 150px;
+    font-size: 40px;
+    font-weight: bolder;
+    padding-top: 30px;
+}

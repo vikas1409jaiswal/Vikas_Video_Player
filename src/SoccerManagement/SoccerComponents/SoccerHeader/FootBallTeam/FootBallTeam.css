@@ -6,28 +6,28 @@
     margin: 5px 10px;
     border-radius: 10px;
     background-color: orange;
+}
 
-    img {
-        height: 90%;
-        width: 90%;
-        margin: 5px;
-        border: 2px solid blue;
-        border-radius: 10px;
-    }
+.soccer-football-team-header img {
+    height: 90%;
+    width: 90%;
+    margin: 5px;
+    border: 2px solid blue;
+    border-radius: 10px;
+}
 
-    h1 {
-        font-size: 50px;
-        font-family: Arial;
-        font-style: normal;
-        font-weight: 700;
-        margin: 5px;
-        padding: 10px;
-        height: 90%;
-        color: darkblue;
-        border-radius: 10px;
-        border: 2px solid black;
-        background-color: honeydew;
-    }
+.soccer-football-team-header h1 {
+    font-size: 50px;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 700;
+    margin: 5px;
+    padding: 10px;
+    height: 90%;
+    color: darkblue;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: honeydew;
 }
 
 

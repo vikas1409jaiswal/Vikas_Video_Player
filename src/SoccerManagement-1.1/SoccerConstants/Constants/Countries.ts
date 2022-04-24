@@ -232,7 +232,7 @@
     }
 };
 
-export const countries = {
+export const countries3 = {
     page1: {
         "BEL": "Belgium",
         "BRA": "Brazil",
@@ -294,4 +294,68 @@ export const countries = {
     
     }
 };
+
+export const countries = {
+    page1: {
+        "BEL": "Belgium",
+        "BRA": "Brazil",
+        "FRA": "France",
+        "ARG": "Argentina",
+        "ENG": "England",
+        "ESP": "Spain",
+        "POR": "Portugal",
+        "DEN": "Denmark",
+        "NED": "Netherlands (the)",
+        "GER": "Germany"
+    },
+    page2: {
+        "MEX": "Mexico",
+        "USA": "United States of America (the)",
+        "SUI": "Switzerland",
+        "CRO": "Croatia",
+        "URU": "Uruguay",
+        "SEN": "Senegal",
+        "IRN": "Iran (Islamic Republic of)",
+        "JPN": "Japan",
+        "MAR": "Morocco",
+        "SRB": "Serbia",
+    },
+    page3: {
+        "POL": "Poland",
+        "KOR": "Korea (the Republic of)",
+        "ECU": "Ecuador",
+        "KSA": "Saudi Arabia",
+        "CAN": "Canada",
+        "GHA": "Ghana",
+        "TUN": "Tunisia",
+        "CMR": "Cameroon",
+        "QAT": "Qatar"
+    },
+    page4: {
+     
+    },
+    page5: {
+       
+    },
+    page6: {
+       
+    },
+    page7: {
+     
+    },
+    page8: {
+       
+    },
+    page9: {
+     
+    },
+    page10: {
+       
+    },
+    page11: {
+    
+    }
+};
+
+
 

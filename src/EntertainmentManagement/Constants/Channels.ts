@@ -14,7 +14,8 @@ export const channels = [
     'PornWorld', 
     'Life Selector', 
     'Private',
-    "Tonight's Girlfriend"
+    "Tonight's Girlfriend",
+    "Newsensation"
 ];
 
 export type VideoDetails = {

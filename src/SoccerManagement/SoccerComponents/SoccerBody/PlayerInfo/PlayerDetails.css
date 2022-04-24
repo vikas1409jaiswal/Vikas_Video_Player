@@ -1,83 +1,80 @@
 ﻿.soccer-football-player {
     display: grid;
     grid-template-columns: 16fr 24fr 1fr;
-    margin: 10px 10px 10px 0px;
+    margin: 10px 10px 10px 0px; 
+}
 
-    .soccer-player-image {
-        border: 2px solid black;
-        padding: 10px;
-        margin: 10px;
-        background-color: honeydew;
-        border-radius: 30px;
+.soccer-player-image {
+     border: 2px solid black;
+     padding: 10px;
+     margin: 10px;
+     background-color: honeydew;
+     border-radius: 30px;
+}
 
-        img {
-            height: 440px;
-            width: 100%;
-            border: 2px solid black;
-            border-radius: 30px;
-            background-color: yellow;
-        }
-    }
+.soccer-player-image img {
+     height: 440px;
+     width: 100%;
+     border: 2px solid black;
+     border-radius: 30px;
+     background-color: yellow;
+}
 
-    .soccer-player-details {
-        h1 {
-            font-size: 35px;
-            font-family: Arial;
-            font-style: normal;
-            font-weight: 800;
-            padding-left: 20px;
-            border: 2px ridge black;
-            border-radius: 10px;
-            background-color: honeydew;
-            margin: 10px;
-            padding: 10px;
-        }
+.soccer-player-details-navigation > button {
+     height: 50%;
+     border-radius: 25px;
+     border: 2px solid blue;
+     background-color: greenyellow;
+}
 
-        div > div > span {
-            font-size: 20px;
-            font-family: Arial;
-            font-style: normal;
-            font-weight: 400;
-            padding-left: 20px;
-        }
+.soccer-player-details-navigation > button:disabled {
+    background-color: yellowgreen;
+}
 
-        .block-ui {
-            height: 400px;
-            background-color: honeydew;
-        }
+.soccer-player-details h1 {
+    font-size: 35px;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 800;
+    padding-left: 20px;
+    border: 2px ridge black;
+    border-radius: 10px;
+    background-color: honeydew;
+    margin: 10px;
+    padding: 10px;
+ }
 
-        .block-ui-overlay {
-            background-color: honeydew;
-        }
+.soccer-player-details div > div > span {
+    font-size: 20px;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 400;
+    padding-left: 20px;
+}
 
-        .soccer-player-details-section > div {
-            border: 2px ridge black;
-            margin: 10px;
-            padding: 10px 0px;
-            border-radius: 10px;
-            background-color: honeydew;
-        }
+.soccer-player-details-section > div {
+    border: 2px ridge black;
+    margin: 10px;
+    padding: 10px 0px;
+    border-radius: 10px;
+    background-color: honeydew;
+}
 
-        .soccer-player-details-section > div > div {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+.soccer-player-details-section > div > div {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+}
 
-            img {
-                margin-top: -5px;
-                height: 50%;
-                border: 0.5px solid blue;
-            }
-        }
-    }
+.soccer-player-details-section > div > div img {
+    margin-top: -5px;
+    height: 50%;
+    border: 0.5px solid blue;
+}
 
-    .soccer-player-details-navigation > button {
-        height: 50%;
-        border-radius: 25px;
-        border: 2px solid blue;
-        background-color: greenyellow;
-    }
-
-    .soccer-player-details-navigation > button:disabled {
-        background-color: yellowgreen;
-    }
+.loading-container {
+    height: 300px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
 }

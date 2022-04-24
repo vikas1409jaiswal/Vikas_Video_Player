@@ -195,9 +195,15 @@ export const PlayerDetails: React.FunctionComponent<PlayerDetailsProps> = (props
                                     <div><span>Player Id </span><span>{props.player?.playerId}</span></div>
                                     <div><span>Full Name </span><span>{playerWithAddInfo.additionalInformation?.fullName || props.player?.playerName}</span></div>
                                     <div><span>Date Of Birth </span><span>{dateOfBirth.toDateString().slice(4)}</span></div>
-                                    <div><span>Birth Place </span><span>{playerWithAddInfo.additionalInformation?.birthPlace}</span></div>
-                                    <div><span>Player Height </span><span>{playerWithAddInfo.additionalInformation?.height}</span></div>
-                                    <div><span>Position </span><span>{playerWithAddInfo.additionalInformation?.positions}</span></div>
+{
+playerWithAddInfo.additionalInformation?.birthPlace && <div><span>Birth Place </span><span>{playerWithAddInfo.additionalInformation?.birthPlace}</span></div>
+}
+{
+playerWithAddInfo.additionalInformation?.height && <div><span>Player Height </span><span>{playerWithAddInfo.additionalInformation?.height}</span></div>
+}
+{
+playerWithAddInfo.additionalInformation?.positions && <div><span>Position </span><span>{playerWithAddInfo.additionalInformation?.positions}</span></div>
+}                                                                                                            
                                     <div><span>Football Club </span><span>{props.player?.clubName} <img src={props.player?.clubNationFlag?.toString()} /></span></div>
                                     <div><span>International Matches </span><span>{props.player?.InternationlCarreer.matches}</span></div>
                                     <div><span>International Goals </span><span>{props.player?.InternationlCarreer.goals}</span></div>

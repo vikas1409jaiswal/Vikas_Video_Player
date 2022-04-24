@@ -1183,6 +1183,19 @@ export const videoInfos2 = [
     "viewDate": "11 Mar 2022"
 },
 {
+    "viewId": 192,
+    "actressName": "Kimmy Granger",
+    "actorName": "Ramon",
+    "channelName": "Newsensation",
+    "videoTitle": "It's A Schoolgirl Thing-3 : Scene-9",
+    "duration": "39:02",
+    "description": "They’re smart, young and cute as hell — It’s easy to see why we’ve got a thing for these schoolgirls! Enjoy 10 scenes of naughty playtime with the beautiful Jillian Janson, Aidra Fox, Karlie Brooks, Emma Hix, Natalie Heart and more! We hope you’re ready to bang, because this student body definitely puts out!",
+    "videoUrl": "",
+    "channelPageUrl": "https://promo.newsensations.com/product_info.php?products_id=3679",
+    "releaseDate": "11 Jun 2018",
+    "viewDate": "12 Mar 2022"
+},
+{
     "viewId": 193,
     "actressName": "Syren De Mer",
     "actorName": "Johnny Sins",

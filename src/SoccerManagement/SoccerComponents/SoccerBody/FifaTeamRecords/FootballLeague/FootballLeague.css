@@ -1,0 +1,27 @@
+﻿.club-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: palegreen;
+    margin: 5px;
+    border: 2px solid black;
+}
+
+.select-soccer-teams {
+    margin: 5px;
+    border: none;
+}
+
+.select-soccer-teams select {
+    background-color: black;
+    color: white;
+}
+
+.show-advanced-panel-button {
+    margin: auto;
+}
+
+.show-advanced-panel-button > button {
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+}

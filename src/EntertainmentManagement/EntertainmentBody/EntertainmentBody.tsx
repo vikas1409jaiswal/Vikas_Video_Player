@@ -207,7 +207,7 @@ export const EntertainmentBody: React.FunctionComponent<EntertainmentBodyProps> 
                                    </thead>
                                    <tbody>
                                        {
-                                           ['Jan 2022', 'Feb 2022', 'Mar 2022'].map(
+                                           ['Jan 2022', 'Feb 2022', 'Mar 2022', 'Apr 2022', 'May 2022'].map(
                                                m => <tr>
                                                    <td>
                                                        {m}

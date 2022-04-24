@@ -42,10 +42,10 @@ export const FootBallTeam: React.FunctionComponent<FootBallTeamProps> = (props) 
                 {
                     !soccerContext.showFifaRankings && !soccerContext.showAllPlayers &&
                     <>
-                        <motion.img animate={teamHeaderControl} src={props.countryInfo ? props.countryInfo.image_path : '//upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/125px-Flag_of_India.svg.png'} />
-                        <motion.h1 animate={teamHeaderControl}>{props.countryInfo ? props.countryInfo.name : 'India'} National Football Team</motion.h1>
-                         {/* <motion.img animate={teamHeaderControl} src={'//upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_North_Macedonia.svg/125px-Flag_of_North_Macedonia.svg.png'} />
-                        <motion.h1 animate={teamHeaderControl}>{'North Macedonia'} National Football Team</motion.h1> */}
+                       <motion.img animate={teamHeaderControl} src={props.countryInfo ? props.countryInfo.image_path : '//upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/125px-Flag_of_India.svg.png'} />
+                        <motion.h1 animate={teamHeaderControl}>{props.countryInfo ? props.countryInfo.name : 'India'} National Football Team</motion.h1> 
+                         {/*  <motion.img animate={teamHeaderControl} src={'//upload.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Qatar.svg/125px-Flag_of_Qatar.svg.png'} />
+                        <motion.h1 animate={teamHeaderControl}>{'Qatar'} National Football Team</motion.h1> */}
                         <div className='soccer-football-team-navigation'>
                             <button onClick={() => {
                                 props.setCurrentSelectedIdIndex(props.currentSelectedIdIndex + 1);

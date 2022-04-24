@@ -9,14 +9,14 @@
     margin: 5px 2px;
 }
 
-.select-soccer-conf {
+.select-soccer-conf, .select-soccer-type, .select-soccer-league {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     margin: 5px;
     background-color: lightgreen;
 }
 
-.select-soccer-conf > span {
+.select-soccer-conf > span, .select-soccer-type > span, .select-soccer-league > span {
     background-color: blue;
     margin: 4px 20%;
     color: white;
@@ -24,13 +24,13 @@
     border-radius: 10px;
 }
 
-.fifa-teams-record-details > div {
+.fifa-teams-record-details > div, .club-teams-record-details > div {
     border: 2px solid black;
     margin: 2px;
     padding: 2px;
 }
 
-.fifa-teams-record-details > h2 {
+.fifa-teams-record-details > h2, .club-teams-record-details > h2 {
     border: 2px solid black;
     margin: 5px 10px;
     text-align: center;

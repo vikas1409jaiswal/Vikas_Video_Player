@@ -1,4 +1,12 @@
-﻿.select-soccer-teams {
+﻿.selection-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: palegreen;
+    margin: 5px;
+    border: 2px solid black;
+}
+
+.select-soccer-teams {
     border: 2px solid black;
     margin: 5px;
     padding: 0.5% 35%;

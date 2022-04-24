@@ -1,0 +1,15 @@
+﻿.soccer-home-page-footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: papayawhip;
+
+    button {
+        background-color: yellow;
+        border-radius: 10px;
+        margin: 10px;
+    }
+
+    button:hover {
+        background-color: skyblue;
+    }
+}
