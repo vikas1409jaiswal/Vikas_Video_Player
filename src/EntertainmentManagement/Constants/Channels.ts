@@ -2,7 +2,8 @@ export const channels = [
     'Brazzers',
     'Realitykings', 
     'Naughty America', 
-    'Digital Playground', 
+    'Digital Playground',
+    'BangBros',
     'Babes Network', 
     'FakeHub', 
     'Mile High Media', 
@@ -15,7 +16,8 @@ export const channels = [
     'Life Selector', 
     'Private',
     "Tonight's Girlfriend",
-    "Newsensation"
+    "Newsensation",
+    'Lubed'
 ];
 
 export type VideoDetails = {
