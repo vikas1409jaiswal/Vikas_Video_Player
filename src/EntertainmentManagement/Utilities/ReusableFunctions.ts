@@ -1,8 +1,9 @@
 import {videoInfos} from './../DataFiles/Page-1';
 import {videoInfos2} from './../DataFiles/Page-2';
 import {videoInfos3} from './../DataFiles/Page-3';
+import {videoInfos4} from './../DataFiles/Page-4';
 
-export const videoInfoDetails = [...videoInfos, ...videoInfos2, ...videoInfos3];
+export const videoInfoDetails = [...videoInfos, ...videoInfos2, ...videoInfos3, ...videoInfos4];
 
 export const arrangeAlphabetically = (a: string, b: string) => {
     if (a > b) {
